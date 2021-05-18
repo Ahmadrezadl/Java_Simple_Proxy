@@ -2,6 +2,7 @@ import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.Socket;
 
 public class Main {
     private static final int DEFAULT_PORT = 1234;
@@ -16,11 +17,10 @@ public class Main {
             port = DEFAULT_PORT;
         }
         try {
-            HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-            server.createContext("/",new RequestHanlder());
-            server.start();
+            Proxy proxy = new Proxy(port);
+            proxy.start();
         } catch (IOException e) {
-            System.out.println("Cannot open server on port " + port);
+            System.out.println("Cannot open proxy on port " + port);
             System.exit(-1);
         }
     }
