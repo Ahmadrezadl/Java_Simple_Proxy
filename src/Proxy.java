@@ -13,7 +13,10 @@ public class Proxy {
         {
             try {
                 Socket socket = serverSocket.accept();
-                RequestHandler handler = new RequestHandler();
+                System.out.println("New Request Received");
+                RequestHandler handler = new RequestHandler(socket);
+                Thread thread = new Thread(handler);
+                thread.start();
             } catch (IOException e) {
                 e.printStackTrace();
             }
